@@ -1,0 +1,9 @@
+STUDENT REPORT
+Generated: 2025-12-16T18:25:25.6195543
+==================================================
+ID: STU004
+Name: Shema Alpha
+Type: Regular
+Average Grade: 0.0%
+Subjects: 0
+Status: ACTIVE

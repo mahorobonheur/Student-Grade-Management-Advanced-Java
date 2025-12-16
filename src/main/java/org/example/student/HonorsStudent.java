@@ -19,6 +19,7 @@ public class HonorsStudent extends Student{
         System.out.println("   Age: " +getAge());
         System.out.println("   Email: " +getEmail());
         System.out.println("   Passing Grade: " +getPassingGrade() + "%");
+        System.out.println("   Enrollment Date: " +getEnrollmentDate());
 
         if(checkHonorsEligibility()){
             System.out.println("   Honors Eligible: " + "Yes");

@@ -23,6 +23,7 @@ public class RegularStudent extends Student{
         System.out.println("   Email: " +getEmail());
         System.out.println("   Passing Grade: " +getPassingGrade() + "%");
         System.out.println("   Status: " +getStatus());
+        System.out.println("   Enrollment Date: " +getEnrollmentDate());
 
     }
 
