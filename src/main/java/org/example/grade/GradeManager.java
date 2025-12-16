@@ -103,7 +103,7 @@ public class GradeManager {
             this.timestamp = new Date();
         }
 
-        // Getters
+
         public String getStudentId() { return studentId; }
         public String getSubjectCode() { return subjectCode; }
         public double getOldGrade() { return oldGrade; }
@@ -132,7 +132,7 @@ public class GradeManager {
             this.scheduledTime = new Date();
         }
 
-        // Getters
+
         public String getDescription() { return description; }
         public int getPriority() { return priority; }
         public Date getScheduledTime() { return scheduledTime; }
@@ -146,7 +146,6 @@ public class GradeManager {
     }
 
     public GradeManager() {
-        // Initialize unique courses from subjects - O(n) where n is subjects count
         for (Subject subject : subjects) {
             if (subject != null) {
                 uniqueCourses.add(subject.getSubjectCode()); // O(1) average
@@ -231,7 +230,6 @@ public class GradeManager {
 
         Subject selectedSubject = filtered.get(subjectChoice - 1);
 
-        // Add to unique courses if new - O(1) average
         uniqueCourses.add(selectedSubject.getSubjectCode());
 
         System.out.print("Enter grade (0–100): ");
@@ -261,7 +259,6 @@ public class GradeManager {
             }
 
             if (update.equalsIgnoreCase("Y")) {
-                // Add to grade history (LinkedList) - O(1) at beginning
                 gradeHistory.addFirst(new GradeHistoryEntry(
                         id, selectedSubject.getSubjectCode(),
                         existing.getGrade(), gradeValue, "UPDATE"
@@ -289,7 +286,6 @@ public class GradeManager {
         theGrade = new Grade(id, selectedSubject, gradeValue);
         theGrade.setGradeId(String.format("GRD%03d", gradeList.size() + 1));
 
-        // Add to ArrayList (maintains insertion order) - O(1) amortized
         gradeList.add(theGrade);
 
         // Add to student's grade list in HashMap - O(1) average
@@ -301,7 +297,7 @@ public class GradeManager {
                 0, gradeValue, "ADD"
         ));
 
-        // Update GPA rankings - O(log n)
+
         updateStudentGpaRanking(student);
 
         // Add to unique grades TreeSet - O(log n)
@@ -347,8 +343,6 @@ public class GradeManager {
         }
     }
 
-    // GPA RANKING METHODS:
-
     // Update GPA ranking in TreeMap - O(log n) for TreeMap operations
     private void updateStudentGpaRanking(Student student) {
         if (student == null) return;
@@ -356,15 +350,12 @@ public class GradeManager {
         String studentId = student.getStudentId();
         double gpa = calculateOverallAverage(studentId);
 
-        // Remove from old GPA list
         for (Map.Entry<Double, List<Student>> entry : gpaRankings.entrySet()) {
             entry.getValue().removeIf(s -> s.getStudentId().equals(studentId)); // O(n)
         }
 
-        // Clean up empty lists
         gpaRankings.entrySet().removeIf(entry -> entry.getValue().isEmpty()); // O(log n)
 
-        // Add to new GPA ranking - O(log n) for TreeMap put
         gpaRankings.computeIfAbsent(gpa, k -> new ArrayList<>()).add(student);
     }
 
@@ -387,9 +378,7 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // UNIQUE COURSES METHODS:
-
-    // Track courses for a student - O(n) where n is student's grades
+    // Track courses for a student - O(n)
     private void trackStudentCourses(String studentId) {
         List<Grade> grades = studentGradesMap.get(studentId);
         if (grades != null) {
@@ -416,7 +405,6 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // LINKEDLIST GRADE HISTORY METHODS:
 
     // Add grade history entry - O(1) at beginning
     public void logGradeChange(String studentId, String subjectCode,
@@ -445,8 +433,6 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // ARRAYLIST GRADE LIST METHODS:
-
     // Get grades in insertion order - O(1) per element iteration
     public List<Grade> getGradesInsertionOrder() {
         return new ArrayList<>(gradeList); // O(n) copy
@@ -460,18 +446,16 @@ public class GradeManager {
         return null;
     }
 
-    // PRIORITY QUEUE TASK METHODS:
-
-    // Add task to queue - O(log n)
+        // Add task to queue - O(log n)
     public void scheduleGradeTask(String description, int priority, Runnable action) {
         taskQueue.add(new GradeTask(description, priority, action));
     }
 
     // Process tasks from queue - O(k log n) where k is tasks processed
     private void processGradeTasks() {
-        System.out.println("\n🔧 Processing scheduled grade tasks...");
+        System.out.println("\n Processing scheduled grade tasks...");
         int processed = 0;
-        while (!taskQueue.isEmpty() && processed < 3) { // Process up to 3 tasks
+        while (!taskQueue.isEmpty() && processed < 3) {
             GradeTask task = taskQueue.poll(); // O(log n)
             System.out.println("  ✓ " + task.getDescription());
             if (task.getTaskAction() != null) {
@@ -489,7 +473,6 @@ public class GradeManager {
         System.out.println("\n📋 PENDING GRADE TASKS (" + taskQueue.size() + " tasks)");
         System.out.println("=".repeat(60));
 
-        // Use a copy to not modify the original queue
         PriorityQueue<GradeTask> copy = new PriorityQueue<>(taskQueue);
         while (!copy.isEmpty()) {
             System.out.println(copy.poll());
@@ -499,7 +482,6 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // UNIQUE GRADES TRACKING (TreeSet):
     private TreeSet<Double> uniqueGradeValues = new TreeSet<>(Collections.reverseOrder());
 
     // Update unique grades - O(log n)
@@ -512,10 +494,10 @@ public class GradeManager {
         System.out.println("\n📊 UNIQUE GRADE DISTRIBUTION");
         System.out.println("=".repeat(40));
 
-        int[] ranges = new int[10]; // 0-9, 10-19, ..., 90-99, 100
+        int[] ranges = new int[10];
         for (Double grade : uniqueGradeValues) {
             int index = (int)(grade / 10);
-            if (index >= 10) index = 9; // 100 goes to 90-99 range
+            if (index >= 10) index = 9;
             ranges[index]++;
         }
 
@@ -525,8 +507,6 @@ public class GradeManager {
             System.out.printf("%3d-%3d: %d students%n", start, end, ranges[i]);
         }
     }
-
-    // CUSTOM SORTING METHODS:
 
     // Get students sorted by multiple criteria - O(n log n) sort
     public List<Student> getStudentsSortedByCriteria(Comparator<Student> comparator) {
@@ -570,7 +550,7 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // EXISTING METHODS UPDATED TO USE NEW DATA STRUCTURES:
+
 
     private Grade findExistingGrade(String studentId, String subjectCode) {
         // O(1) average lookup in HashMap, then O(n) search in list
@@ -603,7 +583,6 @@ public class GradeManager {
         return (grades != null) ? grades.size() : 0;
     }
 
-    // BULK OPERATIONS USING DATA STRUCTURES:
 
     public void analyzeGradeStatistics() {
         System.out.println("\n📊 GRADE STATISTICS ANALYSIS");
@@ -632,10 +611,7 @@ public class GradeManager {
         scanner.nextLine();
     }
 
-    // The rest of your existing methods (viewGradeByStudent, calculateCoreAverage,
-    // exportGradeReport, etc.) remain similar but can be optimized using these data structures
 
-    // For example, in viewGradeByStudent:
     public void viewGradeByStudent(String studentId) {
         // O(1) average lookup in HashMap
         List<Grade> grades = studentGradesMap.get(studentId);
@@ -655,7 +631,6 @@ public class GradeManager {
     // Initialize GPA rankings for all students - O(n log n)
     public void initializeGpaRankings() {
         gpaRankings.clear();
-        // Assuming we have access to all students
         Map<String, Student> allStudents = studentManager.getAllStudents();
         for (Student student : allStudents.values()) {
             updateStudentGpaRanking(student);
@@ -677,12 +652,12 @@ public class GradeManager {
 
     // Clear all data structures - O(n) for each
     public void clearAllData() {
-        gpaRankings.clear(); // O(n)
-        uniqueCourses.clear(); // O(n)
-        gradeHistory.clear(); // O(n)
-        gradeList.clear(); // O(n)
-        taskQueue.clear(); // O(n)
-        studentGradesMap.clear(); // O(n)
-        uniqueGradeValues.clear(); // O(n)
+        gpaRankings.clear();
+        uniqueCourses.clear();
+        gradeHistory.clear();
+        gradeList.clear();
+        taskQueue.clear();
+        studentGradesMap.clear();
+        uniqueGradeValues.clear();
     }
 }
