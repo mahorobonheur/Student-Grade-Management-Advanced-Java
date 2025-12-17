@@ -1,8 +1,7 @@
 package org.example.service;
 
-import org.example.grade.Grade;
-import org.example.student.Student;
-import org.example.subject.Subject;
+import org.example.domain.model.Grade;
+import org.example.domain.model.Student;
 
 import java.io.*;
 import java.nio.file.*;
