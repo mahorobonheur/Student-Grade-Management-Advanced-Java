@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BulkImportService {
 
-    private static final String IMPORT_DIR = "./imports/";
+    private static final String IMPORT_DIR = "./reports/";
 
     static {
         File dir = new File(IMPORT_DIR);

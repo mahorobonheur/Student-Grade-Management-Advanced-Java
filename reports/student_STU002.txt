@@ -1,8 +1,8 @@
 STUDENT REPORT
-Generated: 2025-12-16T18:24:26.7952752
+Generated: 2025-12-17T19:11:04.6227279
 ==================================================
 ID: STU002
-Name: Bruce Mutsinzi
+Name: MAhor
 Type: Honors
 Average Grade: 0.0%
 Subjects: 0

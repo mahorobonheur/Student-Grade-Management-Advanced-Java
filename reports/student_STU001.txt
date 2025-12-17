@@ -1,8 +1,8 @@
 STUDENT REPORT
-Generated: 2025-12-16T18:23:46.4128427
+Generated: 2025-12-17T19:10:42.4750728
 ==================================================
 ID: STU001
-Name: Jay Rwanda
+Name: Burabyo Gift Jolly
 Type: Regular
 Average Grade: 0.0%
 Subjects: 0

@@ -1,0 +1,19 @@
+Student Report - Generated: Wed Dec 17 19:20:25 CAT 2025
+==================================================
+Student ID,STU002
+Name,MAhor
+Type,Honors
+Email,mah@gmail.com
+Phone,0785885859
+Status,ACTIVE
+Average Grade,83.00%
+GPA,3.00
+
+GRADE DETAILS
+Subject,Type,Grade,Letter Grade,Date
+Mathematics,Core,88.00,B+,2025-12-17 19:13:42
+English,Core,78.00,C+,2025-12-17 19:13:51
+
+STATISTICS
+Total Subjects,2
+Status,PASSING

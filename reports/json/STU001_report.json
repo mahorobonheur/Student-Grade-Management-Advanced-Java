@@ -1,0 +1,36 @@
+{
+  "reportId": "3189e1c0-74b4-482e-8e1e-c47ee47f76fd",
+  "generationDate": "Wed Dec 17 19:20:25 CAT 2025",
+  "studentId": "STU001",
+  "name": "Burabyo Gift Jolly",
+  "type": "Regular",
+  "email": "maho@yahoo.com",
+  "phone": "0782817801",
+  "status": "ACTIVE",
+  "averageGrade": 87.66666666666667,
+  "gpa": 3.3,
+  "passingStatus": "PASSING",
+  "grades": [
+    {
+      "subject": "Mathematics",
+      "subjectType": "Core",
+      "grade": 88.0,
+      "letterGrade": "B+",
+      "date": "2025-12-17 19:12:30"
+    },
+    {
+      "subject": "English",
+      "subjectType": "Core",
+      "grade": 77.0,
+      "letterGrade": "C+",
+      "date": "2025-12-17 19:12:43"
+    },
+    {
+      "subject": "Physical Education",
+      "subjectType": "Elective",
+      "grade": 98.0,
+      "letterGrade": "A+",
+      "date": "2025-12-17 19:12:57"
+    }
+  ]
+}

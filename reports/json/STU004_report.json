@@ -1,0 +1,14 @@
+{
+  "reportId": "13cc108d-fe9a-44c6-b719-2feadf1b3663",
+  "generationDate": "Wed Dec 17 19:20:25 CAT 2025",
+  "studentId": "STU004",
+  "name": "Divibe",
+  "type": "Regular",
+  "email": "divi@gmail.com",
+  "phone": "0782226365",
+  "status": "ACTIVE",
+  "averageGrade": 0.0,
+  "gpa": 0.0,
+  "passingStatus": "FAILING",
+  "grades": []
+}

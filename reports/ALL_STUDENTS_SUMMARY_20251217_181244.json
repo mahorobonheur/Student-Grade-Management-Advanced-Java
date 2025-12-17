@@ -1,0 +1,21 @@
+{
+  "exportDate": "2025-12-17T18:12:44.932609100",
+  "reportType": "SUMMARY",
+  "totalStudents": 2,
+  "students": [
+    {
+      "id": "STU001",
+      "name": "Mahoro Bonheur",
+      "type": "Regular",
+      "averageGrade": 99.0,
+      "subjects": 1
+    },
+    {
+      "id": "STU002",
+      "name": "Shema Gift",
+      "type": "Regular",
+      "averageGrade": 99.0,
+      "subjects": 1
+    }
+  ]
+}

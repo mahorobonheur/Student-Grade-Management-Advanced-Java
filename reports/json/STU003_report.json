@@ -1,0 +1,22 @@
+{
+  "reportId": "e29697d2-b1f2-4d7f-ae13-f021af19e05e",
+  "generationDate": "Wed Dec 17 19:20:25 CAT 2025",
+  "studentId": "STU003",
+  "name": "w",
+  "type": "Regular",
+  "email": "mah@gmail.com",
+  "phone": "0782817801",
+  "status": "ACTIVE",
+  "averageGrade": 92.0,
+  "gpa": 3.7,
+  "passingStatus": "PASSING",
+  "grades": [
+    {
+      "subject": "English",
+      "subjectType": "Core",
+      "grade": 92.0,
+      "letterGrade": "A-",
+      "date": "2025-12-17 19:14:38"
+    }
+  ]
+}

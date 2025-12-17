@@ -1,43 +1,54 @@
 package org.example.application;
 
-import org.example.domain.repository.*;
 import org.example.application.service.*;
+import org.example.domain.repository.*;
 
 public class ServiceLocator {
-    private final StudentRepository studentRepository;
-    private final GradeRepository gradeRepository;
     private final StudentService studentService;
     private final GradeService gradeService;
     private final ValidationService validationService;
     private final ExportService exportService;
     private final StatisticsService statisticsService;
+    private final AdvancedStatisticsService advancedStatisticsService;
+    private final SearchService searchService;
+    private final CacheService cacheService;
+    private final AuditService auditService;
+    private final TaskSchedulerService taskSchedulerService;
 
     public ServiceLocator() {
-        this.studentRepository = new InMemoryStudentRepository();
-        this.gradeRepository = new InMemoryGradeRepository();
-        this.validationService = new ValidationService();
-        this.exportService = new ExportService();
-        this.statisticsService = new StatisticsService();
+        // Initialize repositories
+        StudentRepository studentRepo = new InMemoryStudentRepository();
+        GradeRepository gradeRepo = new InMemoryGradeRepository();
 
-        this.studentService = new StudentService(
-                studentRepository,
-                gradeRepository,
-                validationService,
-                exportService
+        // Initialize services
+        validationService = new ValidationService();
+        exportService = new ExportService();
+        statisticsService = new StatisticsService();
+        advancedStatisticsService = new AdvancedStatisticsService(studentRepo, gradeRepo);
+        searchService = new SearchService(studentRepo, gradeRepo);
+        cacheService = new CacheService(studentRepo, gradeRepo);
+        auditService = new AuditService();
+        taskSchedulerService = new TaskSchedulerService();
+
+        studentService = new StudentService(
+                studentRepo, gradeRepo, validationService, exportService
         );
 
-        this.gradeService = new GradeService(
-                gradeRepository,
-                studentRepository,
-                validationService,
-                exportService,
-                statisticsService
+        gradeService = new GradeService(
+                gradeRepo, studentRepo, validationService,
+                exportService, statisticsService
         );
     }
 
+    // Getters for all services
     public StudentService getStudentService() { return studentService; }
     public GradeService getGradeService() { return gradeService; }
     public ValidationService getValidationService() { return validationService; }
     public ExportService getExportService() { return exportService; }
     public StatisticsService getStatisticsService() { return statisticsService; }
+    public AdvancedStatisticsService getAdvancedStatisticsService() { return advancedStatisticsService; }
+    public SearchService getSearchService() { return searchService; }
+    public CacheService getCacheService() { return cacheService; }
+    public AuditService getAuditService() { return auditService; }
+    public TaskSchedulerService getTaskSchedulerService() { return taskSchedulerService; }
 }

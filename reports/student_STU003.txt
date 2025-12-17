@@ -1,9 +1,9 @@
 STUDENT REPORT
-Generated: 2025-12-16T18:24:55.0901306
+Generated: 2025-12-17T19:11:28.4342485
 ==================================================
 ID: STU003
-Name: Peggy Dusenye
-Type: Honors
+Name: w
+Type: Regular
 Average Grade: 0.0%
 Subjects: 0
 Status: ACTIVE

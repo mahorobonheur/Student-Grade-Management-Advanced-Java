@@ -228,7 +228,7 @@ public class GradeService {
     }
 
     public void exportGradeReport(Scanner scanner) {
-        System.out.println("\n📊 EXPORT GRADE REPORT");
+        System.out.println("\nEXPORT GRADE REPORT");
         System.out.println("=".repeat(60));
 
         ExportOptions options = gatherExportOptions(scanner);
@@ -449,7 +449,7 @@ public class GradeService {
             System.out.println("   └─ Export Time: " + formatResult.exportTime + "ms");
         }
 
-        System.out.println("\n📈 PERFORMANCE SUMMARY:");
+        System.out.println("\nPERFORMANCE SUMMARY:");
         System.out.println("   └─ Total Time: " + result.totalTime + "ms");
         System.out.println("   └─ Total Size: " + formatFileSize(result.totalSize));
         System.out.println("   └─ Completed: " + result.completedFormats + "/" + result.formatResults.size() + " formats");
