@@ -2,6 +2,7 @@ package org.example.application;
 
 import org.example.application.service.*;
 import org.example.domain.repository.*;
+import org.example.service.BulkImportService;
 
 public class ServiceLocator {
     private final StudentService studentService;
@@ -14,6 +15,7 @@ public class ServiceLocator {
     private final CacheService cacheService;
     private final AuditService auditService;
     private final TaskSchedulerService taskSchedulerService;
+    private final BulkImportService bulkImportService;
 
     public ServiceLocator() {
         // Initialize repositories
@@ -29,7 +31,7 @@ public class ServiceLocator {
         cacheService = new CacheService(studentRepo, gradeRepo);
         auditService = new AuditService();
         taskSchedulerService = new TaskSchedulerService();
-
+        bulkImportService = new BulkImportService(studentRepo, gradeRepo, validationService);
         studentService = new StudentService(
                 studentRepo, gradeRepo, validationService, exportService
         );
@@ -41,6 +43,7 @@ public class ServiceLocator {
     }
 
     // Getters for all services
+    public BulkImportService getBulkImportService() { return bulkImportService; }
     public StudentService getStudentService() { return studentService; }
     public GradeService getGradeService() { return gradeService; }
     public ValidationService getValidationService() { return validationService; }
@@ -51,4 +54,5 @@ public class ServiceLocator {
     public CacheService getCacheService() { return cacheService; }
     public AuditService getAuditService() { return auditService; }
     public TaskSchedulerService getTaskSchedulerService() { return taskSchedulerService; }
+
 }

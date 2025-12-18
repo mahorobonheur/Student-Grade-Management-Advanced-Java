@@ -212,76 +212,6 @@ public class MenuController {
         waitForEnter();
     }
 
-    private void importData() {
-        System.out.println("\nIMPORT DATA");
-        System.out.println("=".repeat(50));
-
-        while (true) {
-            System.out.println("\nSelect import format:");
-            System.out.println("1. Import from CSV");
-            System.out.println("2. Import from JSON");
-            System.out.println("3. Import from Binary");
-            System.out.println(GO_BACK_MESSAGE);
-            System.out.print("Select option: ");
-
-            String input = scanner.nextLine().trim();
-            if (input.equals(GO_BACK_OPTION)) {
-                return;
-            }
-
-            try {
-                int format = Integer.parseInt(input);
-
-                if (format < 1 || format > 3) {
-                    System.out.println("❌ Invalid option. Please select 1-3 or 0 to go back.");
-                    continue;
-                }
-
-                System.out.print("Enter filename (without extension): ");
-                String filename = scanner.nextLine().trim();
-
-                if (filename.equals(GO_BACK_OPTION)) {
-                    continue;
-                }
-
-                String extension = getExtensionForFormat(format);
-                Path filePath = Paths.get("./imports/", filename + extension);
-
-                if (!Files.exists(filePath)) {
-                    System.out.println("❌ File not found: " + filePath);
-                    System.out.println("Please ensure the file exists in the ./imports/ directory.");
-                    continue;
-                }
-
-                System.out.println("✅ File found: " + filePath);
-                System.out.println("Importing data...");
-
-                // Simulate import process (you would implement actual import logic)
-                Thread.sleep(1000);
-                System.out.println("✅ Import completed successfully!");
-
-                // Display imported data
-                displayImportedData(filePath, format);
-
-                waitForEnter();
-                break;
-
-            } catch (NumberFormatException e) {
-                System.out.println("❌ Please enter a valid number.");
-            } catch (Exception e) {
-                System.out.println("❌ Import failed: " + e.getMessage());
-            }
-        }
-    }
-
-    private String getExtensionForFormat(int format) {
-        switch (format) {
-            case 1: return ".csv";
-            case 2: return ".json";
-            case 3: return ".dat";
-            default: return ".txt";
-        }
-    }
 
     private void displayImportedData(Path filePath, int format) {
         try {
@@ -415,5 +345,66 @@ public class MenuController {
         if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
         if (bytes < 1024 * 1024 * 1024) return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
         return String.format("%.1f GB", bytes / (1024.0 * 1024.0 * 1024.0));
+    }
+
+
+    private void importData() {
+        System.out.println("\nIMPORT DATA");
+        System.out.println("=".repeat(50));
+
+        while (true) {
+            System.out.println("\nSelect option:");
+            System.out.println("1. Import Grades from File");
+            System.out.println("2. List Available Import Files");
+            System.out.println("3. Export Import Templates");
+            System.out.println(GO_BACK_MESSAGE);
+            System.out.print("Select option: ");
+
+            String input = scanner.nextLine().trim();
+            if (input.equals(GO_BACK_OPTION)) {
+                return;
+            }
+
+            try {
+                int option = Integer.parseInt(input);
+
+                switch (option) {
+                    case 1:
+                        importGradesFromFile();
+                        break;
+                    case 2:
+                        serviceLocator.getBulkImportService().listImportFiles();
+                        waitForEnter();
+                        break;
+                    case 3:
+                        serviceLocator.getBulkImportService().exportImportTemplates();
+                        waitForEnter();
+                        break;
+                    default:
+                        System.out.println("❌ Invalid option.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Please enter a valid number.");
+            }
+        }
+    }
+
+    private void importGradesFromFile() {
+        System.out.println("\n📥 IMPORT GRADES FROM FILE");
+        System.out.println("=".repeat(50));
+
+        // List available files
+        serviceLocator.getBulkImportService().listImportFiles();
+
+        System.out.print("\nEnter filename to import (or 'cancel' to go back): ");
+        String filename = scanner.nextLine().trim();
+
+        if (filename.equalsIgnoreCase("cancel")) {
+            return;
+        }
+
+        System.out.println("\nStarting import...");
+        serviceLocator.getBulkImportService().bulkImportGrades(filename);
+        waitForEnter();
     }
 }

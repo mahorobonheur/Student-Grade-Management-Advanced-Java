@@ -1,0 +1,14 @@
+{
+  "exportDate": "2025-12-18T15:11:09.235501500",
+  "reportType": "SUMMARY",
+  "totalStudents": 1,
+  "students": [
+    {
+      "id": "STU001",
+      "name": "Shema Alphonse",
+      "type": "Regular",
+      "averageGrade": 0.0,
+      "subjects": 0
+    }
+  ]
+}
